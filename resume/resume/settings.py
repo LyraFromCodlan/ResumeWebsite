@@ -30,7 +30,8 @@ SECRET_KEY = 'django-insecure-y+9@9n!w@isz4p3ks2k_sqjeqc$%i=9_@vl^)rlkxj=_x9ijxr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# PREVENTS FROM CROSS SITE HOST-ATTACKS BY CHECKING HEADER CONTENT IF ONE HAVE ONE OF THE BELOW URLS
+ALLOWED_HOSTS = ['127.0.0.1','localhost','change_when_about_to_deploy_the_app.com']
 
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'backend'
 ]
 
 MIDDLEWARE = [
@@ -77,11 +79,16 @@ WSGI_APPLICATION = 'resume.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# PostgreSQL database ysed instead of base SQLite one
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'resume',
+        'USER': 'postgres',
+        'PASSWORD': '20percentcooler',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -110,17 +117,21 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
 USE_TZ = True
+
+# propetry adds slash to the end of the url if one doesn't have such and searches for it in main urls.py for response
+APPEND_SLASH = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
