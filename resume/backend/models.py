@@ -15,6 +15,13 @@ class Roles(ChoiceEnum):
 
 # Model is used to depict the sidebar on the main page
 class SideBarElement(models.Model):
+
+# Playing with permission
+    class Meta:
+        permissions = (
+            ('permission_code','Friendly permition description'),
+            )
+
     id : int = models.AutoField(primary_key=True,db_column="id")
     # name of the block
     name : str = models.CharField(max_length=50, db_column="name")

@@ -1,0 +1,18 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main_page.css' %}">
+</head>
+<body>
+
+
+
+    <div class="sidenav">
+        {%for element in side_bar%}
+        <a href="#">{{element.name}}<a>
+        {% endfor %}
+    </div>
+    <div class="main"> CONTENT</div>
+</body>
+</html>
