@@ -7,6 +7,10 @@
             font-family: Invasion;
             src: url({% static "fonts/INVASION2000.TTF" %}) format('truetype');
           }
+        @font-face {
+            font-family: PURegular;
+            src: url({% static "fonts/pixel-ultima-regular.ttf" %}) format('truetype');
+          }
     </style>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main_page.css' %}">
     <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
@@ -15,7 +19,7 @@
 
 
 
-    <div class="sidenav" style="font-family: Invasion;">
+    <div class="sidenav">
         {%for element in side_bar%}
         <a href="#">{{element.name}}<a>
         {% endfor %}
