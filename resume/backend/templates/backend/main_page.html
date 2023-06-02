@@ -21,9 +21,15 @@
 
     <div class="sidenav">
         {%for element in side_bar%}
-        <a href="#">{{element.name}}<a>
+        <a href="#" onclick = "location.href='{% url 'onclick' %}'">{{element.name}} + {% url 'onclick'%}<a>
         {% endfor %}
     </div>
-    <div class="main"> CONTENT <br>{{contents}}</div>
+    <div class="main">{{block}}</div>
+
+    {% if not user.is_authenticated %}
+    <div class="main">if user is not authenticated<br>{user.groups}</div>
+    {% else %}
+    <div class="main">this user is authenticated<br>{{ request.user }}</div>
+    {% endif %}
 </body>
 </html>

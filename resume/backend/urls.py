@@ -4,5 +4,6 @@ from . import views
 urlpatterns = [
     path("", views.returnMainPage, name = "mainPage"),
     path("bar",views.sidebar, name="Sidebar"),
-    path("post_list", views.posts, name="Posts")
+    path("post_list", views.posts, name="Posts"),
+    path("onclick", views.onclick, name="onclick")
 ]
