@@ -137,3 +137,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# URL TO REDIRECT TO THE ADRESS FROM BASIC DJANGO LOGIN TEMPLATE AFTER SUCCESSFUL LOGIN
+LOGIN_REDIRECT_URL = "/"
