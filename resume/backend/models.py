@@ -12,7 +12,6 @@ class Roles(ChoiceEnum):
     # owner, as me, has acess to the contents I store for personal use
     OWNER = 'OWNER'
 
-
 # Model is used to depict the sidebar on the main page
 class SideBarElement(models.Model):
 
@@ -20,9 +19,8 @@ class SideBarElement(models.Model):
     class Meta:
         # difine table name in database
         db_table = "sidebar_elements"
-        permissions = (
-            ('permission_code','Friendly permition description'),
-            )
+        permissions = [('permission_code','Friendly permition description'),]
+            
 
     id : int = models.AutoField(primary_key=True,db_column="id", db_index=True)
     # name of the block
@@ -31,6 +29,8 @@ class SideBarElement(models.Model):
     code: str = models.CharField(max_length=50, db_column="code") 
     # active status dependent on the role - used for administrating or showing blocks only I use
     active: bool = models.BooleanField(default=True, db_column="active")
+
+
     # used to show content based on user permissions 
     content_acess: int = EnumChoiceField(enum_class=Roles)
     # models.CharField(choices=Roles, blank=False, default=Roles.USER)

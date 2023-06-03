@@ -1,13 +1,20 @@
 from django.core.handlers.wsgi import WSGIRequest
 from django.shortcuts import redirect
 
+from .models import SideBarElement, Roles
+
 def loadSidebarElements(view_func):
-    def wrapped_func(request, *args, **kwargs):
-        if request.user.username == 'Lyra':
-            print('wrapped Lyra')
+    def wrapped_func(request: WSGIRequest, *args, **kwargs):
+        # check if it's regular user who has acess only to 'About me section'
+        # or registered user with acess to additional sections such as my projects
+        # or me - owner with acess to personal stuff (movies, notes, schedules and stuff)
+        if request.user.groups.filter(name='USER').exists():
+            sidebar = SideBarElement.objects.filter(content_acess=Roles.USER)
+        elif not request.user.groups.filter(name='OWNER').exists():
+            sidebar = SideBarElement.objects.exclude(content_acess=Roles.OWNER)
         else:
-            print('wrapped LyraHearthstrings')
-        return view_func(request, *args, **kwargs)
+            sidebar = SideBarElement.objects.exclude(content_acess=Roles.OWNER)
+        return view_func(request, sidebar, **kwargs)
     return wrapped_func
 
 def authenticationRequired(view_func):

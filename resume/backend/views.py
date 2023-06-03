@@ -15,8 +15,8 @@ def returnMainPage(request:WSGIRequest):
 
 @authenticationRequired
 @loadSidebarElements
-def sidebar(request:WSGIRequest):
-    side_bar=SideBarElement.objects.all().exclude(content_acess=Roles.ADMIN)
+def sidebar(request:WSGIRequest, *args, **kwargs):
+    side_bar=args[0]
     return render(request = request, template_name= 'backend/main_page.html', context={"side_bar":side_bar,"block": "some data"})
 
 def posts(request:WSGIRequest):
